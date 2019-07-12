@@ -1,0 +1,120 @@
+/*!
+ * Start Bootstrap - Scrolling Nav (https://startbootstrap.com/template-overviews/scrolling-nav)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-scrolling-nav/blob/master/LICENSE)
+ */
+header {
+  padding: 156px 0 100px;
+}
+
+section {
+  padding: 150px 0;
+}
+
+.footer {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 50px;
+}
+
+.vertical-center {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.alignright {
+	float: right;
+}
+
+.alignleft {
+	float: left;
+}
+
+.container {
+	font-family: 'lato', 'sans-serif';
+}
+
+.modal {
+	font-family: 'lato', 'sans-serif';
+}
+
+a:link {
+  color: rgba(255,255,255,0.5);
+}
+
+/* visited link */
+a:visited {
+  color: rgba(255,255,255,0.5);
+}
+
+/* mouse over link */
+a:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+/* selected link */
+a:active {
+  color: rgba(255,255,255,0.5);
+}
+
+.modalTitle {
+	position: absolute;
+}
+
+.bg-cupink {
+	background-color: #DD5A8C;
+}
+
+.drop-shadow {
+    box-shadow: 0px 1px 10px #999;
+}
+
+.btn-pink { 
+  color: #ffffff; 
+  background-color: #EE8098; 
+  border-color: #ED7690; 
+} 
+ 
+.btn-pink:hover, 
+.btn-pink:focus, 
+.btn-pink:active, 
+.btn-pink.active, 
+.open .dropdown-toggle.btn-pink { 
+  color: #ffffff; 
+  background-color: #FF6183; 
+  border-color: #ED7690; 
+} 
+ 
+.btn-pink:active, 
+.btn-pink.active, 
+.open .dropdown-toggle.btn-pink { 
+  background-image: none; 
+} 
+ 
+.btn-pink.disabled, 
+.btn-pink[disabled], 
+fieldset[disabled] .btn-pink, 
+.btn-pink.disabled:hover, 
+.btn-pink[disabled]:hover, 
+fieldset[disabled] .btn-pink:hover, 
+.btn-pink.disabled:focus, 
+.btn-pink[disabled]:focus, 
+fieldset[disabled] .btn-pink:focus, 
+.btn-pink.disabled:active, 
+.btn-pink[disabled]:active, 
+fieldset[disabled] .btn-pink:active, 
+.btn-pink.disabled.active, 
+.btn-pink[disabled].active, 
+fieldset[disabled] .btn-pink.active { 
+  background-color: #EE8098; 
+  border-color: #ED7690; 
+} 
+ 
+.btn-pink .badge { 
+  color: #EE8098; 
+  background-color: #ffffff; 
+}

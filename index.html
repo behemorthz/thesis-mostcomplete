@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Promela to NS Chart Generator</title>
+
+  <!-- Font Awesome Icons -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+  <!-- Theme CSS - Includes Bootstrap -->
+  <link href="css/creative.min.css" rel="stylesheet">
+  <link href="css/function.css" rel="stylesheet">
+</head>
+
+<body id="page-top">
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container">
+      <div class="row align-items-center justify-content-center text-center vertical-align">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-white font-weight-bold">NS Chart Generator for Promela</h1>
+          <hr class="divider my-4">
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+			<div id="drop_file_zone" ondrop="upload_file(event)" ondragover="return false">
+				<div id="drag_upload_file">
+					<img src="img/upload-to-cloud.png" height="90px">
+					<div>
+						<p><input type="button" class="btn btn-link choosefilebtn" value="Choose a file" onclick="file_explorer();"> or drag it here.</p>
+					</div>
+    				<input type="file" id="selectfile">
+				</div>
+			</div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript">
+  var fileobj;
+  function upload_file(e) {
+    e.preventDefault();
+    fileobj = e.dataTransfer.files[0];
+    ajax_file_upload(fileobj);
+  }
+ 
+  function file_explorer() {
+    document.getElementById('selectfile').click();
+    document.getElementById('selectfile').onchange = function() {
+        fileobj = document.getElementById('selectfile').files[0];
+      ajax_file_upload(fileobj);
+    };
+  }
+ 
+  function ajax_file_upload(file_obj) {
+    if(file_obj != undefined) {
+        var form_data = new FormData();                  
+        form_data.append('file', file_obj);
+      $.ajax({
+        type: 'POST',
+        url: 'ajax.php',
+        contentType: false,
+        processData: false,
+        data: form_data,
+        success:function(response) {
+          alert(response);
+          $('#selectfile').val('');
+        }
+      });
+    }
+  }
+  </script>
+  
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/creative.min.js"></script>
+
+</body>
+
+</html>

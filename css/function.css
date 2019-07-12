@@ -1,0 +1,35 @@
+#drop_file_zone {
+    background-color: #FFC0C1; 
+    border: #F4623A 5px dashed;
+    height: 300px;
+    font-size: 18px;
+	vertical-align: center;
+
+}
+#drag_upload_file {
+  	font-family: 'lato', 'sans-serif';
+  	width:50%;
+  	margin:80px auto;
+}
+#drag_upload_file p {
+  	text-align: center;
+	font-style: italic;
+	padding: 8px;
+	color: #646464;
+}
+#drag_upload_file #selectfile {
+  	display: none;
+}
+
+.vertical-align {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.choosefilebtn {
+	font-family: 'lato', 'sans-serif';
+	font-weight: bolder;
+	font-size: .9em;
+	padding: 0px; 
+}

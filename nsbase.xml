@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<formalmodel><loc id="1" lc_id="0" trace="false" type="statement"><code>
+</code></loc><loc id="2" lc_id="1" trace="false" type="statement"><code> /* 
+</code></loc><loc id="3" lc_id="4" trace="false" type="statement"><code>*/
+</code></loc><loc id="4" lc_id="5" trace="false" type="statement"><code>#define TIMES 1000
+</code></loc><loc id="5" lc_id="6" trace="false" type="statement"><code>byte	n = 0;
+</code></loc><loc id="6" lc_id="7" trace="false" type="statement"><code>byte	finished = 0;
+</code></loc><loc id="7" lc_id="8" trace="false" type="statement"><code>
+</code></loc><loc id="8" lc_id="10" trace="false" type="statement"><code>	byte 	i = 1;
+</code></loc><loc id="9" lc_id="11" trace="false" type="statement"><code>	byte	temp;
+</code></loc><loc id="10" lc_id="14" trace="false" type="statement"><code>		temp = n;
+</code></loc><loc id="11" lc_id="15" trace="false" type="statement"><code>		n = temp + 1;
+</code></loc><loc id="12" lc_id="16" trace="false" type="statement"><code>		i++
+</code></loc><loc id="13" lc_id="17" trace="false" type="do"><code>	od;
+</code></loc><loc id="14" lc_id="20" trace="false" type="statement"><code>
+</code></loc><loc id="15" lc_id="23" trace="false" type="statement"><code>	printf("n = %d\n", n);
+</code></loc><loc id="16" lc_id="24" trace="false" type="statement"><code>	assert (n &gt; 2);
+</code></loc><loc id="17" lc_id="25" trace="false" type="statement"><code> /* Assert can't be 2 */
+</code></loc></formalmodel>
