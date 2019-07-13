@@ -15,7 +15,7 @@ for($k=0;$k<$j;$k++){
   else if(preg_match('/proctype/',$keep[$k])){
     array_push($proc,$keep[$k] . "[loc]" . $k);
   }
-  else if(preg_match('/GOoperation/',$keep[$k])){
+  else if(preg_match('/active/',$keep[$k])){
     array_push($proc,$keep[$k] . "[loc]" . $k);
   }
   else if(preg_match('/atomic/',$keep[$k])){
@@ -178,7 +178,7 @@ function genxml($answer){
   $xml = new SimpleXMLElement($str);
 
   $xml->asXML("nsbase.xml");
-  //header( "location: /nsgenerator.php?xml=nsbase.xml");
+  header( "location: result.php?xml=nsbase.xml");
   //exit(0);
 
 }

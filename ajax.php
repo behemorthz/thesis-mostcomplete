@@ -5,7 +5,6 @@ if (!(in_array($_FILES['file']['type'], $arr_file_types))) {
   echo "false";
   return;
 }
- 
 
 if (!file_exists('uploads')) {
   mkdir('uploads', 0777);
@@ -14,10 +13,7 @@ if (!file_exists('uploads')) {
 $filename = time() . '_' . $_FILES['file']['name'];
 move_uploaded_file($_FILES['file']['tmp_name'], 'uploads/' . $filename);
  
-echo "File uploaded successfully.";
-echo $_FILES['file']['type'];
-
- header( "location: basegenerator.php?file=$filename");
- exit(0);
+header( "location: basegenerator.php?file=$filename");
+exit(0);
 
 ?>

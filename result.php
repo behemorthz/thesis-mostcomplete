@@ -42,9 +42,38 @@
   <section id="about">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <div id="canvasArea">
+        <div class="mx-auto">
+          <div class="w-100 p-3" id="canvasArea">
             
+          <?php
+          //$xmlname = "nsbase.xml";
+          $xmlname = $_GET['xml'];
+          $xmldata = simplexml_load_file($xmlname) or die("Failed to load");
+
+          ?>
+          <table border="1">
+          <?php
+            foreach($xmldata as $data){
+                //echo $data->attributes() . "-----";
+                //echo $data->attributes()['type'] . "----";
+                echo "<tr>";
+                echo "<td>";
+                echo $data->children();
+                echo "</td>";
+                echo "</tr>";
+            }
+          ?>
+          </table>
+          <?php
+          /*
+          $i=0;
+          foreach($xmldata as $empl) {         s      
+          echo $empl['loc'][$i]['@attributes']['id'];
+          $i++; 
+          } 
+          */
+          ?>
+          
 		      </div>
         </div>
       </div>
