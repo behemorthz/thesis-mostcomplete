@@ -17,7 +17,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/scrolling-nav.css" rel="stylesheet">
+  <link href="css/scrolling-nav.css?id=1" rel="stylesheet">
 	
   <!-- Custom JS -->
   <link href="js/result.js" rel="stylesheet">
@@ -51,29 +51,62 @@
           $xmldata = simplexml_load_file($xmlname) or die("Failed to load");
 
           ?>
-          <table border="1">
           <?php
-            foreach($xmldata as $data){
-                //echo $data->attributes() . "-----";
-                //echo $data->attributes()['type'] . "----";
-                echo "<tr>";
-                echo "<td>";
-                echo $data->children();
-                echo "</td>";
-                echo "</tr>";
-            }
+          $get_start=0;
+          foreach($xmldata as $data){      
+                if(preg_match('/\b(do)\b/', $data->children()))
+                {
+                // check do
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border-bottom:none;border-left:black solid;border-right:black solid;\">";
+                
+                echo htmlentities($data->children());
+                
+                echo "</div>";
+                echo "</div>";
+                  $get_start = $data->attributes()['lc_id'];
+                }
+
+                else if(preg_match('/\b(od)\b/', $data->children())){
+                  //check od
+                $offset = '';
+                echo "<div class=\"row\">";
+                 echo "<div class=\"col\" style=\"border-top:none;border-left:black solid;border-right:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                $get_stop = $data->attributes()['lc_id'];
+                }
+
+                else if(($data->attributes()['lc_id'] == $get_start+1) && ($get_start != 0)){
+                  // check lc beetween do and od and escape getstart 0
+                  echo "<div class=\"row\" style=\"border-left:black solid;\">";
+                  echo "<div class=\"col\">";
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                $get_start = $data->attributes()['lc_id'];
+                }
+
+                else{
+                  // print statement
+                  $offset = '';
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                }
+          }
           ?>
           </table>
-          <?php
-          /*
-          $i=0;
-          foreach($xmldata as $empl) {         s      
-          echo $empl['loc'][$i]['@attributes']['id'];
-          $i++; 
-          } 
-          */
-          ?>
-          
+
+
 		      </div>
         </div>
       </div>
@@ -133,7 +166,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-pink">Start Process</button>
+          <button type="button" class="btn btn-pink" id="traceStart">Start Process</button>
 		  </div>
       </div>
       
@@ -165,6 +198,9 @@
 		});
 	})
 	  
+	$('#traceStart').on('click', function(e){		
+    alert("Hello! I am an alert box!!");
+	})
   </script>
 
 </body>

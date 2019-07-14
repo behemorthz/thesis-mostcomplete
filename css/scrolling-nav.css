@@ -8,7 +8,7 @@ header {
 }
 
 section {
-  padding: 150px 0;
+  padding: 80px 0;
 }
 
 .footer {
@@ -117,4 +117,12 @@ fieldset[disabled] .btn-pink.active {
 .btn-pink .badge { 
   color: #EE8098; 
   background-color: #ffffff; 
+}
+
+.chidnai{
+  background-color: red;
+}
+
+.traced {
+  background-color: lightgoldenrodyellow;
 }

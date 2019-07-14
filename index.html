@@ -80,8 +80,9 @@
         processData: false,
         data: form_data,
         success:function(response) {
-          alert(response);
+          //alert(response);
           $('#selectfile').val('');
+          window.location.href= "result.php?xml=nsbase.xml";
         }
       });
     }
