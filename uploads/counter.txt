@@ -1,0 +1,116 @@
+  0:	proc  - (:root:) creates proc  0 (:init:)
+Starting P with pid 1
+  1:	proc  0 (:init::1) creates proc  1 (P)
+  1:	proc  0 (:init::1) test1.pml:18 (state 4)	[(run P(0))]
+Starting P with pid 2
+  2:	proc  0 (:init::1) creates proc  2 (P)
+  2:	proc  0 (:init::1) test1.pml:20 (state 2)	[(run P(1))]
+Starting monitor with pid 3
+  3:	proc  0 (:init::1) creates proc  3 (monitor)
+  3:	proc  0 (:init::1) test1.pml:21 (state 3)	[(run monitor())]
+  4:	proc  3 (monitor:1) test1.pml:15 (state 1)	[assert((mutex!=2))]
+  5:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+  6:	proc  2 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+  7:	proc  1 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+  7:	proc  3 (monitor:1) terminates
+  8:	proc  2 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+  9:	proc  1 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 10:	proc  1 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(0) has entered section.
+ 11:	proc  1 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 12:	proc  1 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 13:	proc  1 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 15:	proc  2 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 16:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 17:	proc  2 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+ 18:	proc  1 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+MSC: P(1) has entered section.
+ 19:	proc  2 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 20:	proc  2 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 21:	proc  2 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 22:	proc  1 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 23:	proc  1 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(0) has entered section.
+ 25:	proc  1 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 26:	proc  1 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 27:	proc  1 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 29:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 30:	proc  2 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 31:	proc  2 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 32:	proc  1 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 33:	proc  2 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 34:	proc  2 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(1) has entered section.
+ 35:	proc  2 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 36:	proc  2 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 37:	proc  2 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 38:	proc  1 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 39:	proc  1 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(0) has entered section.
+ 41:	proc  1 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 42:	proc  1 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 43:	proc  1 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 44:	proc  2 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 45:	proc  2 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 46:	proc  2 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 47:	proc  2 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(1) has entered section.
+ 48:	proc  2 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 50:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 51:	proc  2 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 52:	proc  1 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 53:	proc  2 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 54:	proc  1 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 56:	proc  2 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 57:	proc  1 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+ 58:	proc  2 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+MSC: P(0) has entered section.
+ 59:	proc  1 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 60:	proc  1 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 61:	proc  1 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 62:	proc  2 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 64:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 65:	proc  1 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 66:	proc  2 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(1) has entered section.
+ 67:	proc  2 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 68:	proc  2 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 69:	proc  2 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 71:	proc  1 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 72:	proc  1 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(0) has entered section.
+ 73:	proc  1 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 74:	proc  2 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 75:	proc  2 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 76:	proc  1 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 77:	proc  1 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 79:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 80:	proc  1 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 81:	proc  2 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 82:	proc  2 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(1) has entered section.
+ 83:	proc  2 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 84:	proc  2 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 85:	proc  2 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 86:	proc  1 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 88:	proc  2 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 89:	proc  2 (P:1) test1.pml:6 (state 2)	[turn[i] = (turn[(1-i)]+1)]
+ 90:	proc  1 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(0) has entered section.
+ 91:	proc  1 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 92:	proc  1 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+ 93:	proc  1 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+ 94:	proc  2 (P:1) test1.pml:7 (state 3)	[(((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))]
+ 96:	proc  1 (P:1) test1.pml:4 (state 8)	[turn[i] = 1]
+ 97:	proc  2 (P:1) test1.pml:8 (state 4)	[mutex = (mutex+1)]
+MSC: P(1) has entered section.
+ 98:	proc  2 (P:1) test1.pml:9 (state 5)	[printf('MSC: P(%d) has entered section.\\n',i)]
+ 99:	proc  2 (P:1) test1.pml:10 (state 6)	[mutex = (mutex-1)]
+100:	proc  2 (P:1) test1.pml:11 (state 7)	[turn[i] = 0]
+-------------
+depth-limit (-u100 steps) reached
+#processes: 3
+100:	proc  2 (P:1) test1.pml:13 (state 9)
+100:	proc  1 (P:1) test1.pml:6 (state 2)
+100:	proc  0 (:init::1) test1.pml:4 (state 5)
+4 processes created

@@ -1,0 +1,7 @@
+spin: 1563176311_test1.pml:8, Error: syntax error	saw 'operator: ='
+  0:	proc  - (:root:) creates proc  0 (:init:)
+unreachable code: 1563176311_test1.pml:  7  (((turn[(1-i)]==0)||(turn[i]<turn[(1-i)])))
+timeout
+#processes: 1
+  0:	proc  0 (:init::1) 1563176311_test1.pml:18 (state 4)
+1 processes created

@@ -1,7 +1,7 @@
 <?php
-$name = $_GET['file'];
-$keep = file("uploads/".$name);
-//$keep = file("frogs.pml");
+// $name = $_GET['file'];
+// $keep = file("uploads/".$name);
+$keep = file('test1.pml');
 $j = count($keep);
 $que = new SplQueue();
 $proc = array();
@@ -12,10 +12,10 @@ for($k=0;$k<$j;$k++){
   if(preg_match('/init/',$keep[$k])){
     $que->enqueue($keep[$k] . "[loc]" . $k);
   }
-  else if(preg_match('/proctype/',$keep[$k])){
+  else if(preg_match('/\b(proctype)\b/',$keep[$k])){
     array_push($proc,$keep[$k] . "[loc]" . $k);
   }
-  else if(preg_match('/active/',$keep[$k])){
+  else if(preg_match('/\b(active)\b/',$keep[$k])){
     array_push($proc,$keep[$k] . "[loc]" . $k);
   }
   else if(preg_match('/atomic/',$keep[$k])){
@@ -88,7 +88,7 @@ function genxml($answer){
         $split_loc = explode( '[loc]', $answer[$i] );
         $text .= "<loc id=\"";
         $text .= $i+1;
-		$text .= "\" lc_id=\"";
+		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"if\">";
         $text .= "<code>";
@@ -102,7 +102,7 @@ function genxml($answer){
         $split_loc = explode( '[loc]', $answer[$i] );
         $text .= "<loc id=\"";
         $text .= $i+1;
-		$text .= "\" lc_id=\"";
+		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"if\">";
         $text .= "<code>";
@@ -117,21 +117,22 @@ function genxml($answer){
         $split_loc = explode( '[loc]', $answer[$i] );
         $text .= "<loc id=\"";
         $text .= $i+1;
-		$text .= "\" lc_id=\"";
+		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"do\">";
         $text .= "<code>";
         //$text .= htmlspecialchars($answer[$i]);
         $text .= htmlspecialchars($split_loc[0]);
         $text .= "</code>";
-        $text .= "</loc>";
+        //$text .= "</loc>";
         unset($split_loc);
     }
       else if(preg_match('/od/', $answer[$i])){
         $split_loc = explode( '[loc]', $answer[$i] );
+        $text .= "</loc>";
         $text .= "<loc id=\"";
         $text .= $i+1;
-		$text .= "\" lc_id=\"";
+		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"do\">";
         $text .= "<code>";
@@ -145,7 +146,7 @@ function genxml($answer){
         $split_loc = explode( '[loc]', $answer[$i] );
         $text .= "<loc id=\"";
         $text .= $i+1;
-		$text .= "\" lc_id=\"";
+		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"for\">";
         $text .= "<code>";
@@ -160,7 +161,7 @@ function genxml($answer){
         $split_loc = explode( '[loc]', $answer[$i] );
         $text .= "<loc id=\"";
         $text .= $i+1;
-		$text .= "\" lc_id=\"";
+		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"statement\">";
         $text .= "<code>";
@@ -178,7 +179,6 @@ function genxml($answer){
   $xml = new SimpleXMLElement($str);
 
   $xml->asXML("nsbase.xml");
-  header( "location: result.php?xml=nsbase.xml");
   //exit(0);
 
 }

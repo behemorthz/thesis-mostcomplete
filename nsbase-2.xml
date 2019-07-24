@@ -5,26 +5,26 @@
 </code></loc><loc id="4" lc_id="17" trace="false" type="statement"><code>atomic{
 </code></loc><loc id="5" lc_id="18" trace="false" type="statement"><code>run P(0);
 </code></loc><loc id="6" lc_id="2" trace="false" type="statement"><code>proctype P(bit i){
-</code></loc><loc id="7" lc_id="3" trace="false" type="do"><code>    do
-</code><loc id="8" lc_id="4" trace="false" type="statement"><code>    ::  turn[i] = 1;
-</code></loc><loc id="9" lc_id="5" trace="false" type="statement"><code>        turn[i] = turn[1-i]+1;
-</code></loc><loc id="10" lc_id="6" trace="false" type="statement"><code>        (turn[1-i]==0)||(turn[i]&lt;turn[1-i]);
-</code></loc><loc id="11" lc_id="7" trace="false" type="statement"><code>        mutex++;
-</code></loc><loc id="12" lc_id="8" trace="false" type="statement"><code>        printf("MSC: P(%d) has entered section.\n", i);
-</code></loc><loc id="13" lc_id="9" trace="false" type="statement"><code>        mutex--;
-</code></loc><loc id="14" lc_id="10" trace="false" type="statement"><code>        turn[i]=0;
-</code></loc></loc><loc id="15" lc_id="11" trace="false" type="do"><code>    od
+</code></loc><loc id="7" lc_id="3" trace="true" type="do"><code>    do
+</code></loc><loc id="8" lc_id="4" trace="true" type="statement"><code>    ::  turn[i] = 1;
+</code></loc><loc id="9" lc_id="5" trace="true" type="statement"><code>        turn[i] = turn[1-i]+1;
+</code></loc><loc id="10" lc_id="6" trace="true" type="statement"><code>        (turn[1-i]==0)||(turn[i]&lt;turn[1-i]);
+</code></loc><loc id="11" lc_id="7" trace="true" type="statement"><code>        mutex++;
+</code></loc><loc id="12" lc_id="8" trace="true" type="statement"><code>        printf("MSC: P(%d) has entered section.\n", i);
+</code></loc><loc id="13" lc_id="9" trace="true" type="statement"><code>        mutex--;
+</code></loc><loc id="14" lc_id="10" trace="true" type="statement"><code>        turn[i]=0;
+</code></loc><loc id="15" lc_id="11" trace="true" type="do"><code>    od
 </code></loc><loc id="16" lc_id="19" trace="false" type="statement"><code>run P(1);
 </code></loc><loc id="17" lc_id="2" trace="false" type="statement"><code>proctype P(bit i){
 </code></loc><loc id="18" lc_id="3" trace="false" type="do"><code>    do
-</code><loc id="19" lc_id="4" trace="false" type="statement"><code>    ::  turn[i] = 1;
+</code></loc><loc id="19" lc_id="4" trace="false" type="statement"><code>    ::  turn[i] = 1;
 </code></loc><loc id="20" lc_id="5" trace="false" type="statement"><code>        turn[i] = turn[1-i]+1;
 </code></loc><loc id="21" lc_id="6" trace="false" type="statement"><code>        (turn[1-i]==0)||(turn[i]&lt;turn[1-i]);
 </code></loc><loc id="22" lc_id="7" trace="false" type="statement"><code>        mutex++;
 </code></loc><loc id="23" lc_id="8" trace="false" type="statement"><code>        printf("MSC: P(%d) has entered section.\n", i);
 </code></loc><loc id="24" lc_id="9" trace="false" type="statement"><code>        mutex--;
 </code></loc><loc id="25" lc_id="10" trace="false" type="statement"><code>        turn[i]=0;
-</code></loc></loc><loc id="26" lc_id="11" trace="false" type="do"><code>    od
+</code></loc><loc id="26" lc_id="11" trace="false" type="do"><code>    od
 </code></loc><loc id="27" lc_id="20" trace="false" type="statement"><code>run monitor();
 </code></loc><loc id="28" lc_id="13" trace="false" type="statement"><code>proctype monitor(){
 </code></loc><loc id="29" lc_id="14" trace="false" type="statement"><code>    assert(mutex != 2);

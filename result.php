@@ -46,13 +46,14 @@
           <div class="w-100 p-3" id="canvasArea">
             
           <?php
-          //$xmlname = "nsbase.xml";
+          // $xmlname = "nsbase.xml";
           $xmlname = $_GET['xml'];
           $xmldata = simplexml_load_file($xmlname) or die("Failed to load");
 
           ?>
           <?php
           $get_start=0;
+          $get_if=0;
           foreach($xmldata as $data){      
                 if(preg_match('/\b(do)\b/', $data->children()))
                 {
@@ -91,6 +92,133 @@
                 echo "</div>";
                 echo "</div>";
                 $get_start = $data->attributes()['lc_id'];
+                }
+
+                else if(preg_match('/\b(if)\b/', $data->children()))
+                {
+                // check if
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border:black solid;\">";
+              
+                echo htmlentities($data->children());
+                
+                echo "</div>";
+                echo "</div>";
+                $get_if = $data->attributes()['lc_id'];
+                }
+
+                else if(preg_match('/\b(fi)\b/', $data->children())){
+                //check fi
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                $get_stopif = $data->attributes()['lc_id'];
+                }
+
+                else if(($data->attributes()['lc_id'] == $get_if+1) && ($get_if != 0)){
+                // check lc beetween do and od and escape getstart 0
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\">";
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border:black dashed;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                $get_if = $data->attributes()['lc_id'];
+                }
+
+                elseif(preg_match('/\b(do)\b/', $data->children()) && ($data->attributes()['trace'] == "true"))
+                {
+                // check do
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border-bottom:none;border-left:black solid;border-right:black solid;\">";
+                
+                echo htmlentities($data->children());
+                
+                echo "</div>";
+                echo "</div>";
+                  $get_start = $data->attributes()['lc_id'];
+                }
+
+                else if(preg_match('/\b(od)\b/', $data->children()) && ($data->attributes()['trace'] == "true")){
+                  //check od
+                $offset = '';
+                echo "<div class=\"row\">";
+                 echo "<div class=\"col\" style=\"border-top:none;border-left:black solid;border-right:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                $get_stop = $data->attributes()['lc_id'];
+                }
+
+                else if(($data->attributes()['lc_id'] == $get_start+1) && ($get_start != 0) && ($data->attributes()['trace'] == "true")){
+                  // check lc beetween do and od and escape getstart 0
+                  echo "<div class=\"row\" style=\"border-left:black solid;\">";
+                  echo "<div class=\"col\">";
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                $get_start = $data->attributes()['lc_id'];
+                }
+
+                else if(preg_match('/\b(if)\b/', $data->children()) && ($data->attributes()['trace'] == "true"))
+                {
+                // check if
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border:black solid;\">";
+              
+                echo htmlentities($data->children());
+                
+                echo "</div>";
+                echo "</div>";
+                $get_if = $data->attributes()['lc_id'];
+                }
+
+                else if(preg_match('/\b(fi)\b/', $data->children()) && ($data->attributes()['trace'] == "true")){
+                //check fi
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col traced\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                $get_stopif = $data->attributes()['lc_id'];
+                }
+
+                else if(($data->attributes()['lc_id'] == $get_if+1) && ($get_if != 0) && ($data->attributes()['trace'] == "true")){
+                // check lc beetween do and od and escape getstart 0
+                echo "<div class=\"row\" style=\"border-left:black solid;\">";
+                echo "<div class=\"col\">";
+                echo "<div class=\"row\">";
+                echo "<div class=\"col traced\" style=\"border:black dashed;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                $get_start = $data->attributes()['lc_id'];
+                }
+
+                elseif($data->attributes()['trace'] == "true"){
+                  // print traced statement
+                  $offset = '';
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col traced\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
                 }
 
                 else{
@@ -157,21 +285,21 @@
         </div>
         <div class="modal-body">
           <p>To begin the process, please upload a file.<br /><i>(Only .txt file supported)</i></p>
-		<div class="input-group">
-  		  <div class="custom-file">
- 		  	<input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-        	<label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-  		  </div>
-		</div>
+        <div class="input-group">
+            <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            </div>
+        </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-pink" id="traceStart">Start Process</button>
-		  </div>
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-pink" onclick="upload_file(event)">Start Process</button>
+        </div>
+        </div>
+          
+        </div>
       </div>
-      
-    </div>
-  </div>
 
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -196,11 +324,29 @@
      	//window.open(base64image , "_blank");
 		window.location.href=image;
 		});
-	})
+  })
+  
+  function upload_file(e) {
+    e.preventDefault();
+    fileobj = e.dataTransfer.files[0];
+    ajax_file_upload(fileobj);
+  }
 	  
-	$('#traceStart').on('click', function(e){		
-    alert("Hello! I am an alert box!!");
-	})
+  function ajax_file_upload(file_obj) {
+    if(file_obj != undefined) {
+        var form_data = new FormData();                  
+        form_data.append('file', file_obj);
+        $.ajax({
+          type: "POST",
+          url: "ajax2.php",
+          data: form_data,
+          dataType: "dataType",
+          success: function (response) {
+            window.location.href = "result.php?xml=nsbase.xml";
+          }
+        });
+    }
+  }
   </script>
 
 </body>
