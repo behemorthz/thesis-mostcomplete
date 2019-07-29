@@ -1,10 +1,10 @@
 <?php
-$arr_file_types = ['txt'];
+// $arr_file_types = ['txt'];
  
-if (!(in_array($_FILES['file']['type'], $arr_file_types))) {
-  echo "false";
-  return;
-}
+// if (!(in_array($_FILES['file']['type'], $arr_file_types))) {
+//   echo "false";
+//   return;
+// }
 
 if (!file_exists('uploads')) {
   mkdir('uploads', 0777);

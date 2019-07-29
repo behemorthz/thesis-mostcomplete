@@ -46,8 +46,8 @@
           <div class="w-100 p-3" id="canvasArea">
           
           <?php
-          $xmlname = "nsbase.xml";
-          //$xmlname = $_GET['xml'];
+          //$xmlname = "nsbase.xml";
+          $xmlname = $_GET['xml'];
           $xmldata = simplexml_load_file($xmlname) or die("Failed to load");
 
           ?>
@@ -66,58 +66,7 @@
                 
                 echo "</div>";
                 echo "</div>";
-                    foreach($data->children() as $iteration1){
-                        if(preg_match('/\b(do)\b/', $iteration1->children()))
-                        {
-                        // check do
-                        $offset = '';
-                        echo "<div class=\"row\" style=\"border-left:black solid;\">";
-                        echo "<div class=\"col\">";
-                        echo "<div class=\"row\">";
-                        echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
-                
-                        echo htmlentities($iteration1->children());
-                        
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</div>";
-                        echo "</div>";
-                        foreach($iteration1->children() as $iteration2){
-                            echo "<div class=\"row\" style=\"border-left:black solid;\">";
-                            echo "<div class=\"col\">";
-                            echo "<div class=\"row\">";
-                            echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
-                            echo htmlentities($iteration2->children());
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                            foreach($iteration2->children() as $iteration3){
-                                echo "<div class=\"row\" style=\"border-left:black solid;\">";
-                                echo "<div class=\"col\">";
-                                echo "<div class=\"row\">";
-                                echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
-                                echo htmlentities($iteration3->children());
-                                echo "</div>";
-                                echo "</div>";
-                                echo "</div>";
-                                echo "</div>";
-                            }
-    
-                        }
-                    }
-                        else {
-                            echo "<div class=\"row\" style=\"border-left:black solid;\">";
-                            echo "<div class=\"col\">";
-                            echo "<div class=\"row\">";
-                            echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
-                            echo htmlentities($iteration1->children());
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";
-                            echo "</div>";    
-                        }
-                    }
+                  $get_start = $data->attributes()['lc_id'];
                 }
 
                 else if(preg_match('/\b(od)\b/', $data->children())){
@@ -156,14 +105,6 @@
                 
                 echo "</div>";
                 echo "</div>";
-                foreach($data->children() as $if1){
-                    echo "<div class=\"row\">";
-                    echo "<div class=\"col\" style=\"border:black solid;\">";
-                    echo htmlentities($if1->children());
-                    echo "</div>";
-                    echo "</div>";
-                }
-
                 $get_if = $data->attributes()['lc_id'];
                 }
 
@@ -282,14 +223,13 @@
 
                 else{
                   // print statement
-                $offset = '';
-                echo "<div class=\"row\">";
-                echo "<div class=\"col\" style=\"border:black solid;\">";
+                  $offset = '';
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col\" style=\"border:black solid;\">";
                 echo htmlentities($data->children());
                 echo "</div>";
                 echo "</div>";
                 }
-
           }
           ?>
           </table>

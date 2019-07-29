@@ -1,6 +1,6 @@
 <?php
-// $name = $_GET['file'];
-// $keep = file("uploads/".$name);
+//$name = $_GET['file'];
+//$keep = file("uploads/".$name);
 $keep = file('test1.pml');
 $j = count($keep);
 $que = new SplQueue();
@@ -52,6 +52,7 @@ while(!($que ->isEmpty())){
   }
 
 }
+genadjmatrix($answer);
 genxml($answer);
 
 function cutprocname($procname){
@@ -77,6 +78,14 @@ function getProc($nproc){
     }
   }
 }
+
+function genadjmatrix($answer){
+  $nodeCount = count($answer);
+  for($i=0;$i<$nodeCount;$i++){
+    echo "1";
+  }
+}
+
 function genxml($answer){
   $j=count($answer);
   $text = '<formalmodel>';
@@ -86,51 +95,37 @@ function genxml($answer){
       if(preg_match('/\b(if)\b/', $answer[$i]))
       {
         $split_loc = explode( '[loc]', $answer[$i] );
-        $text .= "<loc id=\"";
+        $text .= "<lif id=\"";
         $text .= $i+1;
 		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
         $text .= "\" trace=\"false\" type=\"if\">";
-        $text .= "<code>";
-        //$text .= htmlspecialchars($answer[$i]);
-        $text .= htmlspecialchars($split_loc[0]);
-        $text .= "</code>";
-        $text .= "</loc>";
-        unset($split_loc);
-      }
-      else if(preg_match('/\b(fi)\b/', $answer[$i])){
-        $split_loc = explode( '[loc]', $answer[$i] );
-        $text .= "<loc id=\"";
-        $text .= $i+1;
-		    $text .= "\" lc_id=\"";
-        $text .= $split_loc[1];
-        $text .= "\" trace=\"false\" type=\"if\">";
-        $text .= "<code>";
-        //$text .= htmlspecialchars($answer[$i]);
-        $text .= htmlspecialchars($split_loc[0]);
-        $text .= "</code>";
-        $text .= "</loc>";
-        unset($split_loc);
-    }
-      if(preg_match('/\b(do)\b/', $answer[$i]))
-      {
-        $split_loc = explode( '[loc]', $answer[$i] );
-        $text .= "<loc id=\"";
-        $text .= $i+1;
-		    $text .= "\" lc_id=\"";
-        $text .= $split_loc[1];
-        $text .= "\" trace=\"false\" type=\"do\">";
         $text .= "<code>";
         //$text .= htmlspecialchars($answer[$i]);
         $text .= htmlspecialchars($split_loc[0]);
         $text .= "</code>";
         //$text .= "</loc>";
         unset($split_loc);
-    }
-      else if(preg_match('/od/', $answer[$i])){
+      }
+      else if(preg_match('/\b(fi)\b/', $answer[$i])){
         $split_loc = explode( '[loc]', $answer[$i] );
-        $text .= "</loc>";
-        $text .= "<loc id=\"";
+        $text .= "</lif>";
+        $text .= "<lif id=\"";
+        $text .= $i+1;
+		    $text .= "\" lc_id=\"";
+        $text .= $split_loc[1];
+        $text .= "\" trace=\"false\" type=\"if\">";
+        $text .= "<code>";
+        //$text .= htmlspecialchars($answer[$i]);
+        $text .= htmlspecialchars($split_loc[0]);
+        $text .= "</code>";
+        $text .= "</lif>";
+        unset($split_loc);
+    }
+      if(preg_match('/\b(do)\b/', $answer[$i]))
+      {
+        $split_loc = explode( '[loc]', $answer[$i] );
+        $text .= "<ldo id=\"";
         $text .= $i+1;
 		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
@@ -139,7 +134,23 @@ function genxml($answer){
         //$text .= htmlspecialchars($answer[$i]);
         $text .= htmlspecialchars($split_loc[0]);
         $text .= "</code>";
-        $text .= "</loc>";
+
+        //$text .= "</loc>";
+        unset($split_loc);
+    }
+      else if(preg_match('/od/', $answer[$i])){
+        $split_loc = explode( '[loc]', $answer[$i] );
+        $text .= "</ldo>";
+        $text .= "<ldo id=\"";
+        $text .= $i+1;
+		    $text .= "\" lc_id=\"";
+        $text .= $split_loc[1];
+        $text .= "\" trace=\"false\" type=\"do\">";
+        $text .= "<code>";
+        //$text .= htmlspecialchars($answer[$i]);
+        $text .= htmlspecialchars($split_loc[0]);
+        $text .= "</code>";
+        $text .= "</ldo>";
         unset($split_loc);
     }
       else if(preg_match('/for/', $answer[$i])){
@@ -158,8 +169,14 @@ function genxml($answer){
       }
     else
       {
+        if(preg_match('/\b(if)\b/', $answer[$i]))
+        {}
+        elseif(preg_match('/\b(fi)\b/', $answer[$i]))
+        {}
+        else
+        {
         $split_loc = explode( '[loc]', $answer[$i] );
-        $text .= "<loc id=\"";
+        $text .= "<lstate id=\"";
         $text .= $i+1;
 		    $text .= "\" lc_id=\"";
         $text .= $split_loc[1];
@@ -168,8 +185,9 @@ function genxml($answer){
         //$text .= htmlspecialchars($answer[$i]);
         $text .= htmlspecialchars($split_loc[0]);
         $text .= "</code>";
-        $text .= "</loc>";
+        $text .= "</lstate>";
         unset($split_loc);
+        }
       }
   }
   $text .= '</formalmodel>';

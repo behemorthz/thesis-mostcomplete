@@ -1,31 +1,51 @@
 <?xml version="1.0"?>
-<formalmodel><loc id="1" lc_id="0" trace="false" type="statement"><code>byte turn[2];
-</code></loc><loc id="2" lc_id="1" trace="false" type="statement"><code>byte mutex;
-</code></loc><loc id="3" lc_id="16" trace="false" type="statement"><code>init{
-</code></loc><loc id="4" lc_id="17" trace="false" type="statement"><code>atomic{
-</code></loc><loc id="5" lc_id="18" trace="false" type="statement"><code>run P(0);
-</code></loc><loc id="6" lc_id="2" trace="false" type="statement"><code>proctype P(bit i){
-</code></loc><loc id="7" lc_id="3" trace="false" type="do"><code>    do
-</code></loc><loc id="8" lc_id="4" trace="false" type="statement"><code>    ::  turn[i] = 1;
-</code></loc><loc id="9" lc_id="5" trace="false" type="statement"><code>        turn[i] = turn[1-i]+1;
-</code></loc><loc id="10" lc_id="6" trace="false" type="statement"><code>        (turn[1-i]==0)||(turn[i]&lt;turn[1-i]);
-</code></loc><loc id="11" lc_id="7" trace="false" type="statement"><code>        mutex++;
-</code></loc><loc id="12" lc_id="8" trace="false" type="statement"><code>        printf("MSC: P(%d) has entered section.\n", i);
-</code></loc><loc id="13" lc_id="9" trace="false" type="statement"><code>        mutex--;
-</code></loc><loc id="14" lc_id="10" trace="false" type="statement"><code>        turn[i]=0;
-</code></loc><loc id="15" lc_id="11" trace="false" type="do"><code>    od
-</code></loc><loc id="16" lc_id="19" trace="false" type="statement"><code>run P(1);
-</code></loc><loc id="17" lc_id="2" trace="false" type="statement"><code>proctype P(bit i){
-</code></loc><loc id="18" lc_id="3" trace="false" type="do"><code>    do
-</code></loc><loc id="19" lc_id="4" trace="false" type="statement"><code>    ::  turn[i] = 1;
-</code></loc><loc id="20" lc_id="5" trace="false" type="statement"><code>        turn[i] = turn[1-i]+1;
-</code></loc><loc id="21" lc_id="6" trace="false" type="statement"><code>        (turn[1-i]==0)||(turn[i]&lt;turn[1-i]);
-</code></loc><loc id="22" lc_id="7" trace="false" type="statement"><code>        mutex++;
-</code></loc><loc id="23" lc_id="8" trace="false" type="statement"><code>        printf("MSC: P(%d) has entered section.\n", i);
-</code></loc><loc id="24" lc_id="9" trace="false" type="statement"><code>        mutex--;
-</code></loc><loc id="25" lc_id="10" trace="false" type="statement"><code>        turn[i]=0;
-</code></loc><loc id="26" lc_id="11" trace="false" type="do"><code>    od
-</code></loc><loc id="27" lc_id="20" trace="false" type="statement"><code>run monitor();
-</code></loc><loc id="28" lc_id="13" trace="false" type="statement"><code>proctype monitor(){
-</code></loc><loc id="29" lc_id="14" trace="false" type="statement"><code>    assert(mutex != 2);
-</code></loc></formalmodel>
+<formalmodel><lstate id="1" lc_id="2" trace="false" type="statement"><code>bool    wantp = false, wantq = false;;
+</code></lstate><lstate id="2" lc_id="3" trace="false" type="statement"><code>byte    turn = 1;
+</code></lstate><lstate id="3" lc_id="5" trace="false" type="statement"><code>bool csp = false, csq = false;
+</code></lstate><lstate id="4" lc_id="27" trace="false" type="statement"><code>
+</code></lstate><lstate id="5" lc_id="49" trace="false" type="statement"><code>ltl { []<>csp && []<>csq }
+</code></lstate><lstate id="6" lc_id="50" trace="false" type="statement"><code>init {
+</code></lstate><lstate id="7" lc_id="51" trace="false" type="statement"><code>atomic {
+</code></lstate><lstate id="8" lc_id="52" trace="false" type="statement"><code>run p();
+</code></lstate><lstate id="9" lc_id="6" trace="false" type="statement"><code>proctype p() {
+</code></lstate><ldo id="10" lc_id="7" trace="false" type="do"><code>    do
+</code><lstate id="11" lc_id="8" trace="false" type="statement"><code>    ::  wantp = true;
+</code></lstate><ldo id="12" lc_id="9" trace="false" type="do"><code>        do
+</code><lstate id="13" lc_id="10" trace="false" type="statement"><code>        :: !wantq -&gt; break;
+</code></lstate><lstate id="14" lc_id="11" trace="false" type="statement"><code>        :: else -&gt;
+</code></lstate><lif id="15" lc_id="12" trace="false" type="if"><code>            if
+</code><lstate id="16" lc_id="13" trace="false" type="statement"><code>            :: (turn == 1)
+</code></lstate><lstate id="17" lc_id="14" trace="false" type="statement"><code>            :: (turn == 2) -&gt;
+</code></lstate><lstate id="18" lc_id="15" trace="false" type="statement"><code>                wantp = false;
+</code></lstate><lstate id="19" lc_id="16" trace="false" type="statement"><code>                (turn == 1);
+</code></lstate><lstate id="20" lc_id="17" trace="false" type="statement"><code>                wantp = true
+</code></lstate></lif><lif id="21" lc_id="18" trace="false" type="if"><code>            fi
+</code></lif></ldo><ldo id="22" lc_id="19" trace="false" type="do"><code>        od;
+</code></ldo><lstate id="23" lc_id="20" trace="false" type="statement"><code>        csp = true;
+</code></lstate><lstate id="24" lc_id="21" trace="false" type="statement"><code>        assert (!(csp &amp;&amp; csq));
+</code></lstate><lstate id="25" lc_id="22" trace="false" type="statement"><code>        csp = false;
+</code></lstate><lstate id="26" lc_id="23" trace="false" type="statement"><code>        wantp = false;
+</code></lstate><lstate id="27" lc_id="24" trace="false" type="statement"><code>        turn = 2
+</code></lstate></ldo><ldo id="28" lc_id="25" trace="false" type="do"><code>    od
+</code></ldo><lstate id="29" lc_id="53" trace="false" type="statement"><code>run q();
+</code></lstate><lstate id="30" lc_id="28" trace="false" type="statement"><code>proctype q() {
+</code></lstate><ldo id="31" lc_id="29" trace="false" type="do"><code>    do
+</code><lstate id="32" lc_id="30" trace="false" type="statement"><code>    ::  wantq = true;
+</code></lstate><ldo id="33" lc_id="31" trace="false" type="do"><code>        do
+</code><lstate id="34" lc_id="32" trace="false" type="statement"><code>        :: !wantp -&gt; break;
+</code></lstate><lstate id="35" lc_id="33" trace="false" type="statement"><code>        :: else -&gt;
+</code></lstate><lif id="36" lc_id="34" trace="false" type="if"><code>            if
+</code><lstate id="37" lc_id="35" trace="false" type="statement"><code>            :: (turn == 2)
+</code></lstate><lstate id="38" lc_id="36" trace="false" type="statement"><code>            :: (turn == 1) -&gt;
+</code></lstate><lstate id="39" lc_id="37" trace="false" type="statement"><code>                wantq = false;
+</code></lstate><lstate id="40" lc_id="38" trace="false" type="statement"><code>                (turn == 2);
+</code></lstate><lstate id="41" lc_id="39" trace="false" type="statement"><code>                wantq = true
+</code></lstate></lif><lif id="42" lc_id="40" trace="false" type="if"><code>            fi
+</code></lif></ldo><ldo id="43" lc_id="41" trace="false" type="do"><code>        od;
+</code></ldo><lstate id="44" lc_id="42" trace="false" type="statement"><code>        csq = true;
+</code></lstate><lstate id="45" lc_id="43" trace="false" type="statement"><code>        assert (!(csp &amp;&amp; csq));
+</code></lstate><lstate id="46" lc_id="44" trace="false" type="statement"><code>        csq = false;
+</code></lstate><lstate id="47" lc_id="45" trace="false" type="statement"><code>        wantq = false;
+</code></lstate><lstate id="48" lc_id="46" trace="false" type="statement"><code>        turn = 1
+</code></lstate></ldo><ldo id="49" lc_id="47" trace="false" type="do"><code>    od
+</code></ldo></formalmodel>
