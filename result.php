@@ -192,93 +192,93 @@
                 $get_if = $data->attributes()['lc_id'];
                 }
 
-                // elseif(preg_match('/\b(do)\b/', $data->children()) && ($data->attributes()['trace'] == "true"))
-                // {
-                // // check do
-                // $offset = '';
-                // echo "<div class=\"row\">";
-                // echo "<div class=\"col\" style=\"border-bottom:none;border-left:black solid;border-right:black solid;\">";
+                elseif(preg_match('/\b(do)\b/', $data->children()) && ($data->attributes()['trace'] == "true"))
+                {
+                // check do
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border-bottom:none;border-left:black solid;border-right:black solid;\">";
                 
-                // echo htmlentities($data->children());
+                echo htmlentities($data->children());
                 
-                // echo "</div>";
-                // echo "</div>";
-                //   $get_start = $data->attributes()['lc_id'];
-                // }
+                echo "</div>";
+                echo "</div>";
+                  $get_start = $data->attributes()['lc_id'];
+                }
 
-                // else if(preg_match('/\b(od)\b/', $data->children()) && ($data->attributes()['trace'] == "true")){
-                //   //check od
-                // $offset = '';
-                // echo "<div class=\"row\">";
-                //  echo "<div class=\"col\" style=\"border-top:none;border-left:black solid;border-right:black solid;\">";
-                // echo htmlentities($data->children());
-                // echo "</div>";
-                // echo "</div>";
-                // $get_stop = $data->attributes()['lc_id'];
-                // }
+                else if(preg_match('/\b(od)\b/', $data->children()) && ($data->attributes()['trace'] == "true")){
+                  //check od
+                $offset = '';
+                echo "<div class=\"row\">";
+                 echo "<div class=\"col\" style=\"border-top:none;border-left:black solid;border-right:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                $get_stop = $data->attributes()['lc_id'];
+                }
 
-                // else if(($data->attributes()['lc_id'] == $get_start+1) && ($get_start != 0) && ($data->attributes()['trace'] == "true")){
-                //   // check lc beetween do and od and escape getstart 0
-                //   echo "<div class=\"row\" style=\"border-left:black solid;\">";
-                //   echo "<div class=\"col\">";
-                //   echo "<div class=\"row\">";
-                //   echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
-                // echo htmlentities($data->children());
-                // echo "</div>";
-                // echo "</div>";
-                // echo "</div>";
-                // echo "</div>";
-                // $get_start = $data->attributes()['lc_id'];
-                // }
+                else if(($data->attributes()['lc_id'] == $get_start+1) && ($get_start != 0) && ($data->attributes()['trace'] == "true")){
+                  // check lc beetween do and od and escape getstart 0
+                  echo "<div class=\"row\" style=\"border-left:black solid;\">";
+                  echo "<div class=\"col\">";
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col offset-lg-2\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                $get_start = $data->attributes()['lc_id'];
+                }
 
-                // else if(preg_match('/\b(if)\b/', $data->children()) && ($data->attributes()['trace'] == "true"))
-                // {
-                // // check if
-                // $offset = '';
-                // echo "<div class=\"row\">";
-                // echo "<div class=\"col\" style=\"border:black solid;\">";
+                else if(preg_match('/\b(if)\b/', $data->children()) && ($data->attributes()['trace'] == "true"))
+                {
+                // check if
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col\" style=\"border:black solid;\">";
               
-                // echo htmlentities($data->children());
+                echo htmlentities($data->children());
                 
-                // echo "</div>";
-                // echo "</div>";
-                // $get_if = $data->attributes()['lc_id'];
-                // }
+                echo "</div>";
+                echo "</div>";
+                $get_if = $data->attributes()['lc_id'];
+                }
 
-                // else if(preg_match('/\b(fi)\b/', $data->children()) && ($data->attributes()['trace'] == "true")){
-                // //check fi
-                // $offset = '';
-                // echo "<div class=\"row\">";
-                // echo "<div class=\"col traced\" style=\"border:black solid;\">";
-                // echo htmlentities($data->children());
-                // echo "</div>";
-                // echo "</div>";
-                // $get_stopif = $data->attributes()['lc_id'];
-                // }
+                else if(preg_match('/\b(fi)\b/', $data->children()) && ($data->attributes()['trace'] == "true")){
+                //check fi
+                $offset = '';
+                echo "<div class=\"row\">";
+                echo "<div class=\"col traced\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                $get_stopif = $data->attributes()['lc_id'];
+                }
 
-                // else if(($data->attributes()['lc_id'] == $get_if+1) && ($get_if != 0) && ($data->attributes()['trace'] == "true")){
-                // // check lc beetween do and od and escape getstart 0
-                // echo "<div class=\"row\" style=\"border-left:black solid;\">";
-                // echo "<div class=\"col\">";
-                // echo "<div class=\"row\">";
-                // echo "<div class=\"col traced\" style=\"border:black dashed;\">";
-                // echo htmlentities($data->children());
-                // echo "</div>";
-                // echo "</div>";
-                // echo "</div>";
-                // echo "</div>";
-                // $get_start = $data->attributes()['lc_id'];
-                // }
+                else if(($data->attributes()['lc_id'] == $get_if+1) && ($get_if != 0) && ($data->attributes()['trace'] == "true")){
+                // check lc beetween do and od and escape getstart 0
+                echo "<div class=\"row\" style=\"border-left:black solid;\">";
+                echo "<div class=\"col\">";
+                echo "<div class=\"row\">";
+                echo "<div class=\"col traced\" style=\"border:black dashed;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                echo "</div>";
+                $get_start = $data->attributes()['lc_id'];
+                }
 
-                // elseif($data->attributes()['trace'] == "true"){
-                //   // print traced statement
-                //   $offset = '';
-                //   echo "<div class=\"row\">";
-                //   echo "<div class=\"col traced\" style=\"border:black solid;\">";
-                // echo htmlentities($data->children());
-                // echo "</div>";
-                // echo "</div>";
-                // }
+                elseif($data->attributes()['trace'] == "true"){
+                  // print traced statement
+                  $offset = '';
+                  echo "<div class=\"row\">";
+                  echo "<div class=\"col traced\" style=\"border:black solid;\">";
+                echo htmlentities($data->children());
+                echo "</div>";
+                echo "</div>";
+                }
 
                 else{
                   // print statement
